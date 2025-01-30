@@ -1,64 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+<?php include "./src/partials/head.php"; ?>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="stylesheet" href="./public/css/styles.css">
+<body class="bg-primaryGreen py-8 px-4">
 
-  <title>Frontend Mentor | Contact form</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution {
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .attribution a {
-      color: hsl(228, 45%, 44%);
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1 class="text-4xl text-green-600">Hello</h1>
-
-  Contact Us
-
-  First Name
-  This field is required
-
-  Last Name
-  This field is required
-
-  Email Address
-  Please enter a valid email address
-  This field is required
-
-  Query Type
-  General Enquiry
-  Support Request
-  Please select a query type
-
-  Message
-  This field is required
-
-  I consent to being contacted by the team
-  To submit this form, please consent to being contacted
-
-  Submit
-
-  Message Sent!
-  Thanks for completing the form. We'll be in touch soon!
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-    Coded by <a href="#">Your Name Here</a>.
+  <div class="w-full rounded-2xl p-6 bg-white">
+    <h1 class="text-3xl font-bold text-darkGrey">Contact Us</h1>
+    <?php include __DIR__ . "/src/partials/form.php"; ?>
   </div>
+
 </body>
 
 </html>
