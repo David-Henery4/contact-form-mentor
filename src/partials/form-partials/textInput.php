@@ -7,5 +7,5 @@
   <input
     id=<?= $inputId ?? "input-id"; ?>
     name=<?= $inputName ?? "input-name"; ?>
-    type="text" class="w-full mt-2 rounded-lg px-6 py-3 border-2 border-grey outline-none hover:border-brightGreen focus:border-brightGreen" tabindex="1">
+    type="text" class="w-full mt-2 rounded-lg px-6 py-3 border border-grey outline-none hover:border-brightGreen focus:border-brightGreen" tabindex="1">
 </div>
