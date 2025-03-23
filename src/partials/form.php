@@ -1,4 +1,55 @@
-<form class="w-full mt-8 grid gap-6 smTablet:grid-cols-twoCols smTablet:gap-x-4">
+<?php
+
+$errorsList = [];
+
+function isValidEmail($email)
+{
+  $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+  return preg_match($pattern, $email) === 1;
+}
+
+function checkInput($input)
+{
+  $input = trim($input);
+  $input = stripslashes($input);
+  $input = htmlspecialchars($input);
+  return $input;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+  $inputs = [
+    "first-name" => trim($_POST["first-name"]),
+    "last-name" =>  trim($_POST["last-name"]),
+    "email" => trim($_POST["email"]),
+    "query-type" => $_POST["query-type"] ?? null,
+    "message" => trim($_POST["message"]),
+    "contact-consent" => $_POST["contact-consent"] ?? null,
+  ];
+
+  foreach ($inputs as $key => $value) {
+    if (empty($value)) {
+      $errorsList[$key] = "This field is required";
+    }
+    if ($key === "query-type" && !$value){
+      $errorsList["query-type"] = "Please select a query type";
+    }
+    if ($key === "email" && !isValidEmail($value)) {
+      $errorsList["email"] = "Please enter a valid email address";
+    }
+    if ($key === "contact-consent" && !$value){
+      $errorsList["contact-consent"] = "To submit this form, please consent to being contacted";
+    }
+  }
+
+  // echo "<pre>";
+  // var_dump($errorsList);
+  // echo "</pre>";
+}
+
+?>
+
+<form method="POST" class="w-full mt-8 grid gap-6 smTablet:grid-cols-twoCols smTablet:gap-x-4">
 
   <?php
   $inputId = "first-name";
@@ -17,8 +68,8 @@
   ?>
 
   <?php
-  $inputId = "email-name";
-  $inputName = "email-name";
+  $inputId = "email";
+  $inputName = "email";
   $label = "Email Name";
   $isTwoCols = true;
   include __DIR__ . "/form-partials/textInput.php";
@@ -31,42 +82,37 @@
     </legend>
 
     <div class="w-full mt-2 flex flex-col gap-4 smTablet:flex-row">
-      <div class="relative w-full flex flex-row-reverse justify-end items-center gap-3 rounded-lg px-6 py-3 border border-grey outline-none hover:border-brightGreen focus-within:border-brightGreen has-[input:checked]:border-brightGreen">
-        <input type="radio" name="query-type" id="query-enquiry" class="peer opacity-0 absolute w-full h-full top-0 left-0 z-30">
-        <label for="query-enquiry" class="relative z-20">
-          General Enquiry
-        </label>
-        <div class="relative z-20 w-4 h-4 rounded-full border border-brightGreen peer-checked:after:rounded-full peer-checked:after:bg-brightGreen peer-checked:after:w-2 peer-checked:after:h-2 peer-checked:after:absolute peer-checked:after:top-1/2 peer-checked:after:left-1/2 peer-checked:after:-translate-x-1/2 peer-checked:after:-translate-y-1/2"></div>
-        <div class="hidden peer-checked:block absolute top-0 left-0 w-full h-full bg-brightGreen/20 z-10"></div>
-      </div>
-
-      <div class="relative w-full flex flex-row-reverse justify-end items-center gap-3 rounded-lg px-6 py-3 border border-grey outline-none hover:border-brightGreen focus-within:border-brightGreen has-[input:checked]:border-brightGreen">
-        <label for="query-request" class="relative z-20">
-          Support Request
-        </label>
-        <input type="radio" name="query-type" id="query-request" class="peer opacity-0 absolute w-full h-full top-0 left-0 z-30">
-        <div class="relative z-20 w-4 h-4 rounded-full border border-brightGreen peer-checked:after:rounded-full peer-checked:after:bg-brightGreen peer-checked:after:w-2 peer-checked:after:h-2 peer-checked:after:absolute peer-checked:after:top-1/2 peer-checked:after:left-1/2 peer-checked:after:-translate-x-1/2 peer-checked:after:-translate-y-1/2"></div>
-        <div class="hidden peer-checked:block absolute top-0 left-0 w-full h-full bg-brightGreen/20 z-10"></div>
-      </div>
+      <?php
+      $name = "query-type";
+      $label = "General Enquiry";
+      $id = "query-enquiry";
+      $value = "general-enquiry";
+      include __DIR__ . "/form-partials/radioInput.php";
+      ?>
+      <?php
+      $name = "query-type";
+      $label = "Support Request";
+      $id = "query-request";
+      $value = "support-request";
+      include __DIR__ . "/form-partials/radioInput.php";
+      ?>
     </div>
 
   </fieldset>
 
-  <div class="w-full flex flex-col justify-start items-start gap-3 smTablet:col-start-1 smTablet:col-end-3">
-    <label for="message">
-      Message *
-    </label>
-    <textarea class="w-full min-h-60 resize-none rounded-lg px-6 py-3 border border-grey outline-none smTablet:min-h-32 lgTablet:min-h-28 hover:border-brightGreen focus:border-brightGreen" name="message" id="message">
+  <?php
+  $name = "message";
+  $label = "Message";
+  $id = "message";
+  include __DIR__ . "/form-partials/textareaInput.php";
+  ?>
 
-    </textarea>
-  </div>
-
-  <div class="w-full flex flex-row-reverse justify-end items-center gap-5 smTablet:col-start-1 smTablet:col-end-3">
-    <label for="contact-consent" class="text-base font-normal">
-      I consent to being contacted by the team *
-    </label>
-    <input type="checkbox" name="contact-consent" id="contact-consent" class="border accent-brightGreen border-grey w-5 h-5 ">
-  </div>
+  <?php
+  $name = "contact-consent";
+  $label = "I consent to being contacted by the team";
+  $id = "contact-consent";
+  include __DIR__ . "/form-partials/checkboxInput.php";
+  ?>
 
   <button type="submit" class="p-4 rounded-lg bg-brightGreen text-center hover:bg-darkGrey text-white font-semibold text-lg active:bg-darkGrey smTablet:col-start-1 smTablet:col-end-3">Submit</button>
 
