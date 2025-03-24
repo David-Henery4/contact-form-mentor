@@ -2,11 +2,12 @@
 
 $errorsList = [];
 
-function isValidEmail($email)
-{
-  $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-  return preg_match($pattern, $email) === 1;
-}
+// function isValidEmail($email)
+// {
+//   $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+//   return preg_match($pattern, $email) === 1;
+// }
+
 
 function checkInput($input)
 {
@@ -19,31 +20,31 @@ function checkInput($input)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   $inputs = [
-    "first-name" => trim($_POST["first-name"]),
-    "last-name" =>  trim($_POST["last-name"]),
-    "email" => trim($_POST["email"]),
-    "query-type" => $_POST["query-type"] ?? null,
-    "message" => trim($_POST["message"]),
-    "contact-consent" => $_POST["contact-consent"] ?? null,
+    "first-name" => checkInput($_POST["first-name"]),
+    "last-name" =>  checkInput($_POST["last-name"]),
+    "email" => checkInput($_POST["email"]),
+    "query-type" => isset($_POST["query-type"]) ? checkInput($_POST["query-type"]) : null,
+    "message" => checkInput($_POST["message"]),
+    "contact-consent" => isset($_POST["contact-consent"]) ? checkInput($_POST["contact-consent"]) : null,
   ];
 
   foreach ($inputs as $key => $value) {
     if (empty($value)) {
       $errorsList[$key] = "This field is required";
     }
-    if ($key === "query-type" && !$value){
+    if ($key === "query-type" && !$value) {
       $errorsList["query-type"] = "Please select a query type";
     }
-    if ($key === "email" && !isValidEmail($value)) {
+    if ($key === "email" && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
       $errorsList["email"] = "Please enter a valid email address";
     }
-    if ($key === "contact-consent" && !$value){
+    if ($key === "contact-consent" && !$value) {
       $errorsList["contact-consent"] = "To submit this form, please consent to being contacted";
     }
   }
-
+  //
   // echo "<pre>";
-  // var_dump($errorsList);
+  // var_dump($inputs);
   // echo "</pre>";
 }
 
@@ -85,18 +86,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <?php
       $name = "query-type";
       $label = "General Enquiry";
-      $id = "query-enquiry";
+      $id = "general-enquiry";
       $value = "general-enquiry";
       include __DIR__ . "/form-partials/radioInput.php";
       ?>
       <?php
       $name = "query-type";
       $label = "Support Request";
-      $id = "query-request";
+      $id = "support-request";
       $value = "support-request";
       include __DIR__ . "/form-partials/radioInput.php";
       ?>
     </div>
+
+    <?php if (isset($errorsList[$name])): ?>
+      <div class="w-full mt-2 col-start-1 col-end-[-1]">
+        <p class="text-sm text-red"><?= $errorsList[$name] ?></p>
+      </div>
+    <?php endif; ?>
 
   </fieldset>
 

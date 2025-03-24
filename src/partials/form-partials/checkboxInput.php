@@ -3,7 +3,7 @@
     <label for="<?= $id ?>" class="text-base font-normal">
       <?= "{$label}" ?> *
     </label>
-    <input type="checkbox" name="<?= $name ?>" id="<?= $id ?>" class="border accent-brightGreen border-grey w-5 h-5 ">
+    <input type="checkbox" name="<?= $name ?>" id="<?= $id ?>" class="border accent-brightGreen border-grey w-5 h-5 " <?= isset($_POST[$name]) ? "checked" : "" ?>>
   </div>
   <?php if (isset($errorsList[$name])): ?>
     <div class="w-full mt-2 col-start-1 col-end-[-1]">
