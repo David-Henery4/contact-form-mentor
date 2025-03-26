@@ -8,19 +8,9 @@
     url("../../public/assets/fonts/Karla-Italic-VariableFont_wght.ttf"),
     url("../../public/assets/fonts/static/Karla-Bold.ttf"),
     url("../../public/assets/fonts/static/Karla-Regular.ttf");
-  /* font-weight: normal;
-  font-style: normal; */
 }
 
-/* .success-message {
-  transform: translateY(-200%) translateX(-50%);
-  transition: top 0.5s ease-out, opacity 0.5s ease-out;
-} */
-
 .success-message-ani {
-  /* transform: translateY(-0%) translateX(-50%); */
-  /* top: 20px;
-  opacity: 1; */
   animation: dropFade 0.5s ease-out forwards, fadeOut 0.5s ease-in 3s forwards;
 }
 

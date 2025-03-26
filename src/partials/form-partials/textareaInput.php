@@ -7,8 +7,8 @@ $isError = isset($errorsList[$name])
     <label for="<?= $id ?>">
       <?= "{$label} *" ?>
     </label>
-    <textarea class="w-full min-h-60 resize-none rounded-lg px-6 py-3 border outline-none smTablet:min-h-32 lgTablet:min-h-28 hover:border-brightGreen focus:border-brightGreen        
-      <?= $isError ? "border-red" : "border-grey" ?>" name="<?= $name ?>" id="<?= $id ?> "><?= isset($_POST[$name]) ? trim(htmlentities($_POST[$name])) : "" ?></textarea>
+    <textarea id="<?= $id ?> " name="<?= $name ?>" class="w-full min-h-60 resize-none rounded-lg px-6 py-3 border outline-none smTablet:min-h-32 lgTablet:min-h-28 hover:border-brightGreen focus:border-brightGreen        
+      <?= $isError ? "border-red" : "border-grey" ?>"><?= isset($_POST[$name]) ? trim(htmlentities($_POST[$name])) : "" ?></textarea>
   </div>
   <?php if (isset($errorsList[$name])): ?>
     <div class="w-full mt-2 col-start-1 col-end-[-1]">

@@ -19,6 +19,16 @@ function checkInput($input)
   return $input;
 }
 
+function resetInputs()
+{
+  $_POST["first-name"] = "";
+  $_POST["last-name"] = "";
+  $_POST["email"] = "";
+  $_POST["query-type"] = null;
+  $_POST["message"] = "";
+  $_POST["contact-consent"] = null;
+};
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   $inputs = [
@@ -46,8 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
   //
 
-  if (empty($errorsList)){
+  if (empty($errorsList)) {
     $isSuccesfulSubmit = true;
+    resetInputs();
   };
 
   // echo "<pre>";
@@ -133,6 +144,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   include __DIR__ . "/form-partials/checkboxInput.php";
   ?>
 
-  <button type="submit" class="p-4 rounded-lg bg-brightGreen text-center hover:bg-darkGrey text-white font-semibold text-lg active:bg-darkGrey smTablet:col-start-1 smTablet:col-end-3">Submit</button>
+  <button
+    type="submit"
+    <?= $isSuccesfulSubmit ? "disabled" : "" ?>
+    class="p-4 rounded-lg bg-brightGreen text-center hover:bg-darkGrey text-white font-semibold text-lg active:bg-darkGrey disabled:opacity-50 disabled:hover:bg-brightGreen smTablet:col-start-1 smTablet:col-end-3">
+    Submit
+  </button>
 
 </form>
