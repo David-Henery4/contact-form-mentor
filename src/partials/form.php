@@ -2,6 +2,8 @@
 
 $errorsList = [];
 
+$isSuccesfulSubmit = false;
+
 // function isValidEmail($email)
 // {
 //   $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
@@ -43,6 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
   }
   //
+
+  if (empty($errorsList)){
+    $isSuccesfulSubmit = true;
+  };
+
   // echo "<pre>";
   // var_dump($inputs);
   // echo "</pre>";
@@ -51,6 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <form method="POST" class="w-full mt-8 grid gap-6 smTablet:grid-cols-twoCols smTablet:gap-x-4">
+
+  <?php if ($isSuccesfulSubmit) : ?>
+    <?php include __DIR__ . "/successModal.php"; ?>
+  <?php endif; ?>
+
 
   <?php
   $inputId = "first-name";
