@@ -2,13 +2,16 @@
   "functions": {
     "api/*.php": {
       "runtime": "vercel-php@0.7.3"
+    },
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.3"
     }
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.php" },
     {
       "source": "/src/partials/head.php",
-      "destination": "/api/src/partials/head.php"
+      "destination": "/src/partials/head.php"
     }
   ]
 }
