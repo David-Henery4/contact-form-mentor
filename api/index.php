@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "../api/src/partials/head.php"; ?>
+<?php include "./src/partials/head.php"; ?>
 
 
 
