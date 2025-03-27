@@ -8,6 +8,8 @@
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.php" }
+    { "source": "/(.*)", "destination": "/api/index.php" },
+    { "source": "/partials/*.php", "destination": "/src/partials/*.php" },
+    { "source": "/partials/form-partials/*.php", "destination": "/src/partials/form-partials/*.php" }
   ]
 }
