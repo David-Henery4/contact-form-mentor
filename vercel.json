@@ -13,8 +13,8 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.php" },
     {
-      "source": "/src/partials/head.php",
-      "destination": "/src/partials/head.php"
+      "source": "/api/src/partials/head.php",
+      "destination": "/api/src/partials/head.php"
     }
   ]
 }
