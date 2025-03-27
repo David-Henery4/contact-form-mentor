@@ -9,8 +9,5 @@
     "api/src/partials/form-partials/*.php": {
       "runtime": "vercel-php@0.7.3"
     }
-  },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.php" }
-  ]
+  }
 }
