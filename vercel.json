@@ -12,9 +12,5 @@
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.php" },
-    {
-      "source": "/api/src/partials/head.php",
-      "destination": "/api/src/partials/head.php"
-    }
   ]
 }
