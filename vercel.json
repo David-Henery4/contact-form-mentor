@@ -3,7 +3,10 @@
     "api/*.php": {
       "runtime": "vercel-php@0.7.3"
     },
-    "api/**/*.php": {
+    "api/src/partials/*.php": {
+      "runtime": "vercel-php@0.7.3"
+    },
+    "api/src/partials/form-partials/*.php": {
       "runtime": "vercel-php@0.7.3"
     }
   },
