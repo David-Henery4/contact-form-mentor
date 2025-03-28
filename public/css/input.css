@@ -4,10 +4,10 @@
 
 @font-face {
   font-family: "Karla";
-  src: url("../../public/assets/fonts/Karla-VariableFont_wght.ttf"),
-    url("../../public/assets/fonts/Karla-Italic-VariableFont_wght.ttf"),
-    url("../../public/assets/fonts/static/Karla-Bold.ttf"),
-    url("../../public/assets/fonts/static/Karla-Regular.ttf");
+  src: url("./assets/fonts/Karla-VariableFont_wght.ttf"),
+    url("./assets/fonts/Karla-Italic-VariableFont_wght.ttf"),
+    url("./assets/fonts/static/Karla-Bold.ttf"),
+    url("./assets/fonts/static/Karla-Regular.ttf");
 }
 
 .success-message-ani {
