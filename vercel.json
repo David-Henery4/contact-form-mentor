@@ -3,13 +3,16 @@
     "api/*.php": {
       "runtime": "vercel-php@0.7.3"
     },
-    "api/**/**/*.php": {
+    "api/src/partials/*.php": {
+      "runtime": "vercel-php@0.7.3"
+    },
+    "api/src/partials/form-partials/*.php": {
       "runtime": "vercel-php@0.7.3"
     }
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.php" },
-    { "source": "src/partials/*.php", "destination": "/src/partials/*.php" },
+    { "source": "./src/partials/*.php", "destination": "./src/partials/*.php" },
     { "source": "/partials/form-partials/*.php", "destination": "/src/partials/form-partials/*.php" }
   ]
 }
