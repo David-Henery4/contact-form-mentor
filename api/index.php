@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "./src/partials/head.php"; ?>
+<?php include __DIR__ . "/src/partials/head.php"; ?>
 
 
 
